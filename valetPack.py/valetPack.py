@@ -24,8 +24,16 @@ def is_zsh():
 
 def brew_version():
     try:
-        brewTerminalOutput = str(run_command(['run', '-v']))
+        brewTerminalOutput = str(run_command(['brew', '-v']))
         return split_string(brewTerminalOutput, 'Homebrew', 6)
+    except:
+        return "Not installed or bash paths incorrect"
+
+
+def composer_version():
+    try:
+        brewTerminalOutput = str(run_command(['composer', '-V']))
+        return split_string(brewTerminalOutput, 'Composer', 16)
     except:
         return "Not installed or bash paths incorrect"
 
@@ -33,10 +41,12 @@ def brew_version():
 window = Tk()
 window.title('Valet dev pack')
 window.geometry('600x400')
-labelZsh = Label(window, text='Your Zsh Version').place(x=10, y=10)
+labelZsh = Label(window, text='Is ZSH installed').place(x=10, y=10)
 labelZshData = Label(window, text=is_zsh()).place(x=200, y=10)
 labelBrew = Label(window, text='Brew Version').place(x=10, y=40)
 labelBrewData = Label(window, text=brew_version()).place(x=200, y=40)
 labelComposer = Label(window, text='Composer Version').place(x=10, y=70)
-labelComposerData = Label(window, text='Composer Version').place(x=200, y=70)
+labelComposerData = Label(window, text=composer_version()).place(x=200, y=70)
+labelValet = Label(window, text='Valet Version').place(x=10, y=100)
+labelValetData = Label(window, text=composer_version()).place(x=200, y=100)
 window.mainloop()
